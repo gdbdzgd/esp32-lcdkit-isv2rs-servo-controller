@@ -29,9 +29,6 @@ jobs:
         esp_idf_version: v5.2.6
         target: esp32c3
         path: '.'
-    
-    - name: Build firmware
-      run: idf.py build
 
     - name: Create firmware artifact
       run: |
