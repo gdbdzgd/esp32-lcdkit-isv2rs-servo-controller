@@ -31,13 +31,10 @@ jobs:
         path: '.'
     
     - name: Build firmware
-      run: |
-        source ~/esp/esp-idf/export.sh
-        idf.py build
-    
+      run: idf.py build
+
     - name: Create firmware artifact
       run: |
-        source ~/esp/esp-idf/export.sh
         # Create build artifact directory
         mkdir -p firmware
         
