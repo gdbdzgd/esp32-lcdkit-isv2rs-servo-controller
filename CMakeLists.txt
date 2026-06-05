@@ -9,4 +9,4 @@ add_compile_options(-fdiagnostics-color=always
                     -Wno-implicit-fallthrough
                     -Wno-unused-local-typedefs
                     -Wno-ignored-qualifiers)
-project(c3_knob_panel)
+project(esp32-lcdkit-isv2rs-servo-controller)

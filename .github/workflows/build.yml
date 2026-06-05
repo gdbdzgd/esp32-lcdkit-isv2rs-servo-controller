@@ -42,7 +42,7 @@ jobs:
         mkdir -p firmware
         
         # Copy binary files
-        cp build/knob_panel.bin firmware/
+        cp build/esp32-lcdkit-isv2rs-servo-controller.bin firmware/
         cp build/bootloader/bootloader.bin firmware/
         cp build/partition_table/partition-table.bin firmware/
         
@@ -54,7 +54,7 @@ jobs:
         echo "  --chip esp32c3 write_flash --flash_mode dio --flash_size 4MB \\" >> firmware/FLASH_INSTRUCTIONS.txt
         echo "  0x0 bootloader.bin \\" >> firmware/FLASH_INSTRUCTIONS.txt
         echo "  0x8000 partition-table.bin \\" >> firmware/FLASH_INSTRUCTIONS.txt
-        echo "  0x10000 knob_panel.bin" >> firmware/FLASH_INSTRUCTIONS.txt
+        echo "  0x10000 esp32-lcdkit-isv2rs-servo-controller.bin" >> firmware/FLASH_INSTRUCTIONS.txt
         echo "" >> firmware/FLASH_INSTRUCTIONS.txt
         echo "Method 2: Using idf.py" >> firmware/FLASH_INSTRUCTIONS.txt
         echo "idf.py -p PORT flash" >> firmware/FLASH_INSTRUCTIONS.txt
@@ -63,12 +63,12 @@ jobs:
         
         # Create archive
         cd firmware
-        tar -czf ../knob_panel-firmware.tar.gz *
+        tar -czf ../esp32-lcdkit-isv2rs-servo-controller-firmware.tar.gz *
     
     - name: Upload firmware artifact
       uses: actions/upload-artifact@v4
       with:
-        name: knob_panel-firmware
+        name: esp32-lcdkit-isv2rs-servo-controller-firmware
         path: firmware/
         retention-days: 30
     
@@ -82,15 +82,15 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          firmware/knob_panel.bin
+          firmware/esp32-lcdkit-isv2rs-servo-controller.bin
           firmware/bootloader.bin
           firmware/partition-table.bin
           firmware/FLASH_INSTRUCTIONS.txt
         body: |
-          ## ESP32-C3 Knob Panel Firmware Release ${VERSION}
+          ## ESP32-C3 LCDKit iSV2-RS Servo Controller Firmware Release ${VERSION}
           
           ### Download Files
-          - `knob_panel.bin`: Main application firmware
+          - `esp32-lcdkit-isv2rs-servo-controller.bin`: Main application firmware
           - `bootloader.bin`: ESP32-C3 bootloader
           - `partition-table.bin`: Partition table
           - `FLASH_INSTRUCTIONS.txt`: Flashing instructions
