@@ -52,7 +52,7 @@ static bool servo_main_enter_cb(void *layer);
 static bool servo_main_exit_cb(void *layer);
 static void servo_main_timer_cb(lv_timer_t *tmr);
 
-lv_layer_t servo_main_layer = {
+app_layer_t servo_main_layer = {
     .lv_obj_name    = "servo_main_Layer",
     .lv_obj_parent  = NULL,
     .lv_obj_layer   = NULL,
@@ -397,7 +397,7 @@ void ui_servo_main_init(lv_obj_t *parent)
 static bool servo_main_enter_cb(void *layer)
 {
     bool ret = false;
-    lv_layer_t *create_layer = layer;
+    app_layer_t *create_layer = layer;
 
     UI_LOGI("main_enter: layer=%p obj=%p", layer, create_layer->lv_obj_layer);
 

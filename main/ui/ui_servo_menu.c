@@ -41,7 +41,7 @@ static bool servo_menu_enter_cb(void *layer);
 static bool servo_menu_exit_cb(void *layer);
 static void servo_menu_timer_cb(lv_timer_t *tmr);
 
-lv_layer_t servo_menu_layer = {
+app_layer_t servo_menu_layer = {
     .lv_obj_name    = "servo_menu_Layer",
     .lv_obj_parent  = NULL,
     .lv_obj_layer   = NULL,
@@ -427,7 +427,7 @@ void ui_servo_menu_init(lv_obj_t *parent)
 static bool servo_menu_enter_cb(void *layer)
 {
     bool ret = false;
-    lv_layer_t *create_layer = layer;
+    app_layer_t *create_layer = layer;
 
     if (NULL == create_layer->lv_obj_layer) {
         ret = true;

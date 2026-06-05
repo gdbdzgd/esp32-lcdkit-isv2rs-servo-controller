@@ -19,7 +19,7 @@ static const char *TAG = "lvgl_basic";
  **********************/
 
 static lv_timer_t *timer_system;
-static lv_layer_t *current_layer = NULL;
+static app_layer_t *current_layer = NULL;
 
 static time_out_count time_enter_clock = {
     .timeOut = 0,
@@ -53,7 +53,7 @@ bool reload_time_out(time_out_count *tm)
     return true;
 }
 
-void lv_func_create_layer(lv_layer_t *create_layer)
+void lv_func_create_layer(app_layer_t *create_layer)
 {
     bool result = false;
     result = create_layer->enter_cb(create_layer);
@@ -81,10 +81,10 @@ void lv_func_create_layer(lv_layer_t *create_layer)
     }
 }
 
-void lv_func_goto_layer(lv_layer_t *dst_layer)
+void lv_func_goto_layer(app_layer_t *dst_layer)
 {
     lv_timer_enable(false);
-    lv_layer_t *src_layer = current_layer;
+    app_layer_t *src_layer = current_layer;
 
     if (src_layer) {
 
@@ -143,7 +143,7 @@ void lv_func_goto_layer(lv_layer_t *dst_layer)
 /*
  * once only
  */
-void lv_create_home(lv_layer_t *home_layer)
+void lv_create_home(app_layer_t *home_layer)
 {
     ESP_LOGI(TAG, "Enter home page");
     timer_system = lv_timer_get_next(NULL);
@@ -163,8 +163,8 @@ void enter_clock_time()
 
 static void time_clock_update_cb(lv_timer_t *timer)
 {
-    lv_obj_t *obj = (lv_obj_t *)timer->user_data;
-    lv_layer_t *clock_layer = (lv_layer_t *)obj;
+    lv_obj_t *obj = (lv_obj_t *)lv_timer_get_user_data(timer);
+    app_layer_t *clock_layer = (app_layer_t *)obj;
 
     if (is_time_out(&time_enter_clock)) {
         lv_func_goto_layer(clock_layer);
@@ -172,7 +172,7 @@ static void time_clock_update_cb(lv_timer_t *timer)
     }
 }
 
-void lv_create_clock(lv_layer_t *clock_layer, uint32_t tmOut)
+void lv_create_clock(app_layer_t *clock_layer, uint32_t tmOut)
 {
     set_time_out(&time_enter_clock, tmOut);
     lv_timer_t *timer_clock = lv_timer_create(time_clock_update_cb, 1 * 1000, clock_layer);

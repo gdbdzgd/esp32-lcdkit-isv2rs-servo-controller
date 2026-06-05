@@ -38,9 +38,9 @@ typedef struct {
     int8_t volume;
     uint16_t position_speed;
 } servo_ui_data_t;
+extern app_layer_t servo_main_layer;
 
-extern lv_layer_t servo_main_layer;
-extern lv_layer_t servo_menu_layer;
+extern app_layer_t servo_menu_layer;
 extern servo_ui_data_t servo_data;
 extern int32_t position_target;
 extern bool ui_on_main_screen;
